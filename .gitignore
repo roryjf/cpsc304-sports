@@ -1,0 +1,9 @@
+#ignore node modules folder
+node_modules/
+
+#ignore grunt output files
+public/src
+
+#ignore log files
+*.log
+npm-debug.log*
