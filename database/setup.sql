@@ -9,26 +9,27 @@ DROP TABLE staffInTeam;
 
 
 CREATE TABLE staffInTeam (
-staffID char(5),
+staffId char(5),
 name char(20),
-teamID int NOT NULL,
-PRIMARY KEY (staffID),
-FOREIGN KEY (teamID) references Teams
+teamId int NOT NULL,
+PRIMARY KEY (staffId),
+FOREIGN KEY (teamId) references Teams
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 );
 
 CREATE TABLE coaches (
-staffID int,
+staffId int,
 title char(20),
-PRIMARY KEY (staffID),
-FOREIGN KEY (staffID) references Staff
+PRIMARY KEY (staffId),
+FOREIGN KEY (staffId) references Staff
 );
 
 CREATE TABLE managers (
-staffID int,
-PRIMARY KEY (staffID),
-FOREIGN KEY (staffID) references Staff
+staffId int,
+teamId int,
+PRIMARY KEY (staffId),
+FOREIGN KEY (staffId) references Staff
 );
 
 
@@ -41,14 +42,14 @@ fouls int,
 onGoal% int,
 goals int,
 assists int,
-teamID int NOT NULL,
+teamId int NOT NULL,
 PRIMARY KEY (name, Jersey#),
-FOREIGN KEY (teamID) references teamsInLeague
+FOREIGN KEY (teamId) references teamsInLeague
 );
 
 CREATE TABLE teamsInLeague (
  	tName char(20),
-	teamID int,
+	teamId int,
 	wins int,
 	losses int,
 	draws int,
@@ -73,26 +74,26 @@ ON DELETE CASCADE
 );
 
 CREATE TABLE matchesPlayedByTeams(
- 	matchID int,
+ 	matchId int,
  	location char(20),
-	teamID int
+	teamId int
 result char(4) NOT NULL,
  	time int,
 	date date,
  	goals int,
 	#yellowCards int,
 	#redCards int,
-	PRIMARY KEY (teamID, matchID)
-FOREIGN KEY (teamID) references teamsInLeague
+	PRIMARY KEY (teamId, matchId)
+FOREIGN KEY (teamId) references teamsInLeague
 	ON DELETE CASCADE
 );
 
 CREATE TABLE updatedBy (
- 	staffID int,
+ 	staffId int,
  	name char (20) NOT NULL,
  	Jersey# int NOT NULL,
-PRIMARY KEY (staffID, name, Jersey#)
-FOREIGN KEY (staffID) references managers,
+PRIMARY KEY (staffId, name, Jersey#)
+FOREIGN KEY (staffId) references managers,
 FOREIGN KEY (name, Jersey#) references PlayersInLeague
 );
 
